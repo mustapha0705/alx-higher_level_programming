@@ -1,0 +1,16 @@
+#!/bin/bash
+PYFILE="$PYFILE"
+
+echo "Compiling $PYFILE ..."
+python -m py_compile "$PYFILE"
+
+BASENAME=$(basename -- "$PYFILE")
+
+OUTPUT_FILE="${BASENAME%.py}.pyc"
+
+mv "__pycache__/$BASENAME.cpython-*.pyc" "$OUTPUT_FILE"
+
+mv "$OUTPUT_FILE" .
+
+echo "Python script compiled successfully. Output filename: $OUTPUT_FILE"
+
