@@ -1,0 +1,40 @@
+#!/usr/bin/python3
+"""
+This is the test file for the add_integer function.
+"""
+
+import doctest
+import unittest
+from add_integer import add_integer
+
+class TestAddInteger(unittest.TestCase):
+    """
+    Test cases for the add_integer function.
+    """
+
+    def test_add_integer(self):
+        """
+        Test add_integer function.
+        """
+
+        # Test integer inputs
+        self.assertEqual(add_integer(1, 2), 3)
+        self.assertEqual(add_integer(100, -2), 98)
+
+        # Test single input
+        self.assertEqual(add_integer(2), 100)
+
+        # Test float inputs
+        self.assertEqual(add_integer(100.3, -2), 98)
+        
+        # Test invalid inputs
+        with self.assertRaises(TypeError) as e:
+            add_integer(4, "School")
+        self.assertEqual(str(e.exception), "b must be an integer")
+
+        with self.assertRaises(TypeError) as e:
+            add_integer(None)
+        self.assertEqual(str(e.exception), "a must be an integer")
+
+if __name__ == '__main__':
+    unittest.main()
