@@ -1,0 +1,37 @@
+#!/usr/bin/python3
+"""
+This is the test file for the lazy_matrix_mul function.
+"""
+
+import unittest
+from lazy_matrix_mul import lazy_matrix_mul
+
+class TestLazyMatrixMul(unittest.TestCase):
+    """
+    Test cases for the lazy_matrix_mul function.
+    """
+
+    def test_regular_matrices(self):
+        """
+        Test case for regular matrices multiplication.
+        """
+        self.assertEqual(lazy_matrix_mul([[1, 2], [3, 4]], [[1, 2], [3, 4]]).tolist(), [[7, 10], [15, 22]])
+
+    def test_different_dimension_matrices(self):
+        """
+        Test case for matrices with different dimensions.
+        """
+        self.assertEqual(lazy_matrix_mul([[1, 2]], [[3, 4], [5, 6]]).tolist(), [[13, 16]])
+
+    def test_empty_matrices(self):
+        """
+        Test case for empty matrices.
+        """
+        with self.assertRaises(ValueError) as e:
+            lazy_matrix_mul([], [])
+        self.assertEqual(str(e.exception), "m_a can't be empty or m_b can't be empty")
+
+    # Add more test cases as needed
+
+if __name__ == '__main__':
+    unittest.main()

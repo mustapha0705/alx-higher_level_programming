@@ -1,0 +1,45 @@
+#!/usr/bin/python3
+"""
+This is the test file for the matrix_mul function.
+"""
+
+import unittest
+from matrix_mul import matrix_mul
+
+class TestMatrixMul(unittest.TestCase):
+    """
+    Test cases for the matrix_mul function.
+    """
+
+    def test_regular_matrices(self):
+        """
+        Test case for regular matrices multiplication.
+        """
+        self.assertEqual(matrix_mul([[1, 2], [3, 4]], [[1, 2], [3, 4]]), [[7, 10], [15, 22]])
+
+    def test_different_dimension_matrices(self):
+        """
+        Test case for matrices with different dimensions.
+        """
+        self.assertEqual(matrix_mul([[1, 2]], [[3, 4], [5, 6]]), [[13, 16]])
+
+    def test_empty_matrices(self):
+        """
+        Test case for empty matrices.
+        """
+        with self.assertRaises(ValueError) as e:
+            matrix_mul([], [])
+        self.assertEqual(str(e.exception), "m_a can't be empty or m_b can't be empty")
+
+    def test_non_list_matrices(self):
+        """
+        Test case for non-list matrices.
+        """
+        with self.assertRaises(TypeError) as e:
+            matrix_mul(123, "456")
+        self.assertEqual(str(e.exception), "m_a must be a list or m_b must be a list")
+
+    # Add more test cases as needed
+
+if __name__ == '__main__':
+    unittest.main()
