@@ -1,0 +1,58 @@
+#!/usr/bin/python3
+"""
+This is the test file for the text_indentation function.
+"""
+
+import unittest
+from text_indentation import text_indentation
+import sys
+from io import StringIO
+
+class TestTextIndentation(unittest.TestCase):
+    """
+    Test cases for the text_indentation function.
+    """
+
+    def test_text_indentation(self):
+        """
+        Test text_indentation function.
+        """
+
+        # Redirect stdout to capture printed output
+        captured_output = StringIO()
+        sys.stdout = captured_output
+
+        # Test case 1
+        text_indentation("Lorem ipsum dolor sit amet, consectetur adipiscing elit. \
+Quonam modo? Utrum igitur tibi litteram videor an totas paginas commovere? \
+Non autem hoc: igitur ne illud quidem. Fortasse id optimum, sed ubi illud: \
+Plus semper voluptatis? Teneo, inquit, finem illi videri nihil dolere. \
+Transfer idem ad modestiam vel temperantiam, quae est moderatio cupiditatum \
+rationi oboediens. Si id dicis, vicimus. Inde sermone vario sex illa a Dipylo \
+stadia confecimus. Sin aliud quid voles, postea. Quae animi affectio suum \
+cuique tribuens atque hanc, quam dico. Utinam quidem dicerent alium alio \
+beatiorem! Iam ruinas videres")
+
+        expected_output = """Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Quonam modo?
+Utrum igitur tibi litteram videor an totas paginas commovere?
+Non autem hoc:
+igitur ne illud quidem.
+Fortasse id optimum, sed ubi illud:
+Plus semper voluptatis?
+Teneo, inquit, finem illi videri nihil dolere.
+Transfer idem ad modestiam vel temperantiam, quae est moderatio cupiditatum rationi oboediens.
+Si id dicis, vicimus.
+Inde sermone vario sex illa a Dipylo stadia confecimus.
+Sin aliud quid voles, postea.
+Quae animi affectio suum cuique tribuens atque hanc, quam dico.
+Utinam quidem dicerent alium alio beatiorem! Iam ruinas videres
+"""
+
+        self.assertEqual(captured_output.getvalue(), expected_output)
+
+        # Reset stdout
+        sys.stdout = sys.__stdout__
+
+if __name__ == '__main__':
+    unittest.main()

@@ -1,0 +1,39 @@
+#!/usr/bin/python3
+"""
+This is the test file for the say_my_name function.
+"""
+
+import unittest
+from say_my_name import say_my_name
+
+class TestSayMyName(unittest.TestCase):
+    """
+    Test cases for the say_my_name function.
+    """
+
+    def test_say_my_name(self):
+        """
+        Test say_my_name function.
+        """
+
+        # Test case 1
+        self.assertEqual(say_my_name("John", "Smith"), None)
+
+        # Test case 2
+        self.assertEqual(say_my_name("Walter", "White"), None)
+
+        # Test case 3
+        self.assertEqual(say_my_name("Bob"), None)
+
+        # Test case 4: Non-string first name
+        with self.assertRaises(TypeError) as e:
+            say_my_name(12, "White")
+        self.assertEqual(str(e.exception), "first_name must be a string")
+
+        # Test case 5: Non-string last name
+        with self.assertRaises(TypeError) as e:
+            say_my_name("John", 123)
+        self.assertEqual(str(e.exception), "last_name must be a string")
+
+if __name__ == '__main__':
+    unittest.main()

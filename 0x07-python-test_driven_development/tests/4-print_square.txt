@@ -1,0 +1,65 @@
+#!/usr/bin/python3
+"""
+This is the test file for the print_square function.
+"""
+
+import unittest
+from print_square import print_square
+import sys
+from io import StringIO
+
+class TestPrintSquare(unittest.TestCase):
+    """
+    Test cases for the print_square function.
+    """
+
+    def test_print_square(self):
+        """
+        Test print_square function.
+        """
+
+        # Redirect stdout to capture printed output
+        captured_output = StringIO()
+        sys.stdout = captured_output
+
+        # Test case 1
+        print_square(4)
+        expected_output = "####\n####\n####\n####\n"
+        self.assertEqual(captured_output.getvalue(), expected_output)
+
+        # Test case 2
+        captured_output.truncate(0)
+        captured_output.seek(0)
+        print_square(10)
+        expected_output = "##########\n##########\n##########\n##########\n##########\n##########\n##########\n##########\n##########\n##########\n"
+        self.assertEqual(captured_output.getvalue(), expected_output)
+
+        # Test case 3
+        captured_output.truncate(0)
+        captured_output.seek(0)
+        print_square(0)
+        expected_output = ""
+        self.assertEqual(captured_output.getvalue(), expected_output)
+
+        # Test case 4
+        captured_output.truncate(0)
+        captured_output.seek(0)
+        print_square(1)
+        expected_output = "#\n"
+        self.assertEqual(captured_output.getvalue(), expected_output)
+
+        # Test case 5: Size less than 0
+        with self.assertRaises(ValueError) as e:
+            print_square(-1)
+        self.assertEqual(str(e.exception), "size must be >= 0")
+
+        # Test case 6: Size is a float less than 0
+        with self.assertRaises(TypeError) as e:
+            print_square(-1.5)
+        self.assertEqual(str(e.exception), "size must be an integer")
+
+        # Reset stdout
+        sys.stdout = sys.__stdout__
+
+if __name__ == '__main__':
+    unittest.main()
