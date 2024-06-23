@@ -1,65 +1,93 @@
-#!/usr/bin/python3
-"""
-This is the test file for the print_square function.
-"""
 
-import unittest
-from print_square import print_square
-import sys
-from io import StringIO
+============================
+How to Use 4-print_square.py
+============================
 
-class TestPrintSquare(unittest.TestCase):
-    """
-    Test cases for the print_square function.
-    """
+This module defines a square-printing function ``print_square(size)``.
 
-    def test_print_square(self):
-        """
-        Test print_square function.
-        """
+Usage
+=====
 
-        # Redirect stdout to capture printed output
-        captured_output = StringIO()
-        sys.stdout = captured_output
+Squares are printed using the ``#`` character. The parameter ``size``
+represents the height and width of the square.
 
-        # Test case 1
-        print_square(4)
-        expected_output = "####\n####\n####\n####\n"
-        self.assertEqual(captured_output.getvalue(), expected_output)
+::
 
-        # Test case 2
-        captured_output.truncate(0)
-        captured_output.seek(0)
-        print_square(10)
-        expected_output = "##########\n##########\n##########\n##########\n##########\n##########\n##########\n##########\n##########\n##########\n"
-        self.assertEqual(captured_output.getvalue(), expected_output)
+    >>> print_square = __import__('4-print_square').print_square
+    >>> print_square(1)
+    #
 
-        # Test case 3
-        captured_output.truncate(0)
-        captured_output.seek(0)
-        print_square(0)
-        expected_output = ""
-        self.assertEqual(captured_output.getvalue(), expected_output)
+::
 
-        # Test case 4
-        captured_output.truncate(0)
-        captured_output.seek(0)
-        print_square(1)
-        expected_output = "#\n"
-        self.assertEqual(captured_output.getvalue(), expected_output)
+    >>> print_square(4)
+    ####
+    ####
+    ####
+    ####
 
-        # Test case 5: Size less than 0
-        with self.assertRaises(ValueError) as e:
-            print_square(-1)
-        self.assertEqual(str(e.exception), "size must be >= 0")
+::
 
-        # Test case 6: Size is a float less than 0
-        with self.assertRaises(TypeError) as e:
-            print_square(-1.5)
-        self.assertEqual(str(e.exception), "size must be an integer")
+    >>> print_square(10)
+    ##########
+    ##########
+    ##########
+    ##########
+    ##########
+    ##########
+    ##########
+    ##########
+    ##########
+    ##########
 
-        # Reset stdout
-        sys.stdout = sys.__stdout__
+If ``size`` is zero, the function prints nothing.
 
-if __name__ == '__main__':
-    unittest.main()
+::
+
+    >>> print_square(0)
+
+Invalid Sizes
+=============
+
+The parameter ``size`` must be an integer. Otherwise, a TypeError is raised.
+
+::
+
+    >>> print_square("not an int")
+    Traceback (most recent call last):
+    TypeError: size must be an integer
+
+::
+
+    >>> print_square(5.5)
+    Traceback (most recent call last):
+    TypeError: size must be an integer
+
+::
+
+    >>> print_square(None)
+    Traceback (most recent call last):
+    TypeError: size must be an integer
+
+If ``size`` is less than zero, a ValueError is raised.
+
+::
+
+    >>> print_square(-7)
+    Traceback (most recent call last):
+    ValueError: size must be >= 0
+
+Note that type-checking occurs before value-checking.
+
+::
+
+    >>> print_square(-7.5)
+    Traceback (most recent call last):
+    TypeError: size must be an integer
+
+At least one argument must be provided.
+
+::
+
+    >>> print_square()
+    Traceback (most recent call last):
+    TypeError: print_square() missing 1 required positional argument: 'size'
