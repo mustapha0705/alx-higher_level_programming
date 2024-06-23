@@ -1,3 +1,4 @@
+#!/usr/bin/node
 // javascript project
 
 const myVar = 'JavaScript is amazing';
