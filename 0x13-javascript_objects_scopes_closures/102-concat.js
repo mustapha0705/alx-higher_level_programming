@@ -34,8 +34,6 @@ fs.readFile(fileAPath, 'utf8', (err, dataA) => {
         console.error(`Error writing to file ${destinationPath}:`, err.message);
         process.exit(1);
       }
-
-      console.log(`Files ${fileAPath} and ${fileBPath} concatenated successfully into ${destinationPath}`);
     });
   });
 });
