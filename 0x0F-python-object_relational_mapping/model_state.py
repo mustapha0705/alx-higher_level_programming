@@ -11,6 +11,7 @@ mymetadata = MetaData()
 # Create declarative base with custom metadata
 Base = declarative_base(metadata=mymetadata)
 
+
 # Define State class inheriting from Base
 class State(Base):
     """
